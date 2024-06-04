@@ -1,3 +1,9 @@
+const displayText = document.querySelector("#display");
+if (displayText !== null) {
+	displayText.textContent = "0";
+}
+
+
 function add(x: number,y: number): number {
 	return x + y;
 }
@@ -39,5 +45,21 @@ function operate (n1: number, n2: number, op: string): number | undefined {
 	case "divide":
 		return divide(n1,n2);
 	}
+}
+
+const number_buttons = document.querySelectorAll("button.number");
+number_buttons.forEach((number_button) => {
+	const value: string = number_button.textContent!;
+	number_button.addEventListener("click", () => button_push(value));
+});
+
+function button_push(val: string) {
+
+	if (displayText!.textContent === "0") {
+		displayText!.textContent = val;
+	} else {
+		displayText!.textContent += val;
+	}
+
 }
 

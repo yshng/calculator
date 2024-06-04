@@ -11,9 +11,6 @@
 	padding: 20px;
 	display: flex;
 	flex-wrap: wrap;
-	font-weight: 300;
-	text-align: center;
-	font-size: 3em;
 	gap: 10px;
 	background-color: navy;
 }
@@ -27,13 +24,17 @@
 	display: flex;
 	align-items: flex-end;
 	justify-content: flex-end;
-	font-size: 1.2em;
-
-}
-
-#display p {
+	font-size: 3.5em;
 	padding-right: 10px;
+
 }
+
+button {
+	font-weight: 300;
+	text-align: center;
+	font-size: 3em;
+}
+
 
 .single {
 	border: 1px solid black;
