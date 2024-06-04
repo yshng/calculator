@@ -1,0 +1,54 @@
+* {
+	box-sizing: border-box;
+	padding: 0;
+	margin: 0;
+	font-family: "Sometype Mono", sans-serif;
+}
+
+#container {
+	margin: 10px auto;
+	width: 400px;
+	padding: 20px;
+	display: flex;
+	flex-wrap: wrap;
+	font-weight: 300;
+	text-align: center;
+	font-size: 3em;
+	gap: 10px;
+	background-color: navy;
+}
+
+#display {
+	border: 1px solid black;
+	aspect-ratio: 4 / 1;
+	flex: 1 1 100%;
+	text-align: right;
+	background-color: #bbb;
+	display: flex;
+	align-items: flex-end;
+	justify-content: flex-end;
+	font-size: 1.2em;
+
+}
+
+#display p {
+	padding-right: 10px;
+}
+
+.single {
+	border: 1px solid black;
+	aspect-ratio: 1 / 1;
+	flex: 1 1 22%;
+}
+
+.triple {
+	border: 1px solid black;
+	flex: 1 1 75%;
+}
+
+.single, .triple {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: lightblue;
+}
