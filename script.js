@@ -1,8 +1,14 @@
 "use strict";
 const displayText = document.querySelector("#display");
-if (displayText !== null) {
-    displayText.textContent = "0";
+function resetDisplay() {
+    if (displayText !== null) {
+        displayText.textContent = "0";
+    }
+    else {
+        console.log("Error: No element with id = 'display'");
+    }
 }
+resetDisplay();
 function add(x, y) {
     return x + y;
 }
@@ -40,13 +46,25 @@ function operate(n1, n2, op) {
 const number_buttons = document.querySelectorAll("button.number");
 number_buttons.forEach((number_button) => {
     const value = number_button.textContent;
-    number_button.addEventListener("click", () => button_push(value));
+    number_button.addEventListener("click", () => type_number(value));
 });
-function button_push(val) {
-    if (displayText.textContent === "0") {
-        displayText.textContent = val;
+function type_number(val) {
+    if (displayText !== null && displayText.textContent !== null) {
+        if (displayText.textContent === "0") {
+            displayText.textContent = val;
+        }
+        else if (displayText.textContent.length >= 10) {
+            alert("Calculator can only take inputs up to 10 digits");
+        }
+        else {
+            displayText.textContent += val;
+        }
     }
-    else {
-        displayText.textContent += val;
-    }
+}
+const clear_button = document.querySelector("#clear");
+if (clear_button !== null) {
+    clear_button.addEventListener("click", () => resetDisplay());
+}
+else {
+    console.log("Error: No element with id = 'clear'");
 }
