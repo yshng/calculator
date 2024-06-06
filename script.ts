@@ -10,36 +10,37 @@ function resetDisplay() {
 
 resetDisplay();
 
-function add(x: number,y: number): number {
-	return x + y;
+function add(x: string,y: string): string {
+	return String(parseInt(x) + parseInt(y));
 }
 
 
-function subtract(x: number, y: number): number {
-	return x - y;
+function subtract(x: string, y: string): string {
+	return String(parseInt(x) - parseInt(y));
 }
 
 
-function multiply(x: number, y: number): number {
-	return x * y;
+function multiply(x: string, y: string): string {
+	return String(parseInt(x) * parseInt(y));
 }
 
 
-function divide(x: number, y: number): number  {
-	if (y === 0) {
+function divide(x: string, y: string): string | undefined  {
+	if (y === "0") {
 		alert("You cannot divide by 0");
-		return y;		
+		return undefined;		
 	} else {
-		return x / y;
+		let result: number = parseInt(x) / parseInt(y);
+		let buffer: number = 10 - String(result).length;
+		return result.toFixed(buffer);
 	}
 }
 
 let num1: string = "";
 let num2: string = "";
 let operator: string;
-let waiting_for_second_number: boolean = false;
 
-function operate (n1: number, n2: number, op: string): number | undefined {
+function operate (n1: string, n2: string, op: string): string | undefined {
 	switch (op) {
 	case "add": 
 		return add(n1,n2);
@@ -58,25 +59,52 @@ number_buttons.forEach((number_button) => {
 	number_button.addEventListener("click", () => type_number(value));
 })
 
-function type_number(val: string) {
+function type_number(value: string) {
 
+	if (num1 === "") {
+		num1 += value; 
+		updateDisplay(num1);
+	} else {
+		num2 += value; 
+		updateDisplay(num2);
+	}
 
-	if (!waiting_for_second_number) {num1 += val;}
+}
 
+function updateDisplay(value: string) {	
 	if (displayText !== null && displayText.textContent !== null) {
 		if (displayText.textContent.length >= 10) {
 			alert ("Calculator can only take inputs up to 10 digits");
 		} else {
-			displayText.textContent = num1;
+			displayText.textContent = value;
 		}
 	}
 }
+
 
 const clear_button = document.querySelector("#clear");
 if (clear_button !== null) {
 	clear_button.addEventListener("click", () => resetDisplay());
 } else {
 	console.log("Error: No element with id = 'clear'");
+}
+
+const equals_button = document.querySelector("#equals");
+if (equals_button !== null) {
+	equals_button.addEventListener("click", () => {
+		if (num1 === "") {
+			updateDisplay("0");
+		} else if (num2 === "") {
+			updateDisplay(num1);
+			clearMemory();
+		} else { 
+			num1 = String(operate(num1, num2, operator));
+			updateDisplay(num1);
+			num2 = "";
+		}
+	})
+} else {
+	console.log("Error: No element with id = 'equals'");
 }
 
 const operation_buttons = document.querySelectorAll("operator"); 
