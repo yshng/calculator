@@ -4,6 +4,7 @@ let num1: string = "";
 let num2: string = "";
 let operator: string = "";
 let waiting_on_second_number: boolean = false;
+let last_button_equals: boolean = false;
 
 // operation functions, less type-switching overall if use strings as input and output here
 
@@ -56,6 +57,7 @@ function clearAll() {
 	num2 = "";
 	operator= "";
     waiting_on_second_number = false;
+    last_button_equals = false;
 	if (displayText !== null) {
 		displayText.textContent = "0";
 	} else {
@@ -83,6 +85,8 @@ number_buttons.forEach((number_button) => {
 
 function input_number(value: string) {
 
+	if(last_button_equals === true) {clearAll();}
+
 	if (waiting_on_second_number === false) {
 		num1 += value; 
 		updateDisplay(num1);
@@ -107,6 +111,7 @@ if (equals_button !== null) {
 			; // need two operands to do something
 		} else { 
 			displayAnswer(num1, num2, operator);
+			last_button_equals = true;
 		}
 	})
 } else {
@@ -128,16 +133,15 @@ if (operation_buttons !== null) {
 		operation_button.addEventListener("click", () => {
 			const value: string | null = operation_button.getAttribute("id");
 			if (value !== null) {
-				if (operator === "") {
-					operator = value;
-					waiting_on_second_number = true;
-				} else {
+				last_button_equals = false;
+				if (operator !== "") {
 					displayAnswer(num1,num2,operator);
-					operator = value;
-					waiting_on_second_number = true;
+				}
+				operator = value;
+				waiting_on_second_number = true;		
 				}
 			}
-		})
+		)
 	})
 }
 		
