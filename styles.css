@@ -7,7 +7,7 @@
 
 #container {
 	margin: 10px auto;
-	width: 400px;
+	width: 380px;
 	padding: 20px;
 	display: flex;
 	flex-wrap: wrap;
@@ -44,7 +44,7 @@ button {
 
 .triple {
 	border: 1px solid black;
-	flex: 1 1 75%;
+	flex: 1 1 72%;
 }
 
 .single, .triple {
