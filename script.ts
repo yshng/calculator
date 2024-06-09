@@ -67,7 +67,12 @@ function clearAll() {
 
 function updateDisplay(value: string) {	
 	if (displayText !== null && displayText.textContent !== null) {
+		if (value === "NaN") {
+			displayText.textContent = "Error";
+			clearAll();
+		} else {
 			displayText.textContent = value;
+		}
 	}
 }
 
@@ -134,14 +139,20 @@ if (operation_buttons !== null) {
 			const value: string | null = operation_button.getAttribute("id");
 			if (value !== null) {
 				last_button_equals = false;
-				if (operator !== "") {
-					displayAnswer(num1,num2,operator);
+				if (operator !== "" && num1 !== "" && num2 !== "") {   // chain operations
+					displayAnswer(num1,num2,operator); 
+					input_operation(value);
+				} else if (operator === "" && num1 !== "") {		   // regular operation
+					input_operation(value);
 				}
-				operator = value;
-				waiting_on_second_number = true;		
-				}
+
 			}
-		)
+		})
 	})
+}
+
+function input_operation(value: string) {
+	operator = value;
+	waiting_on_second_number = true;
 }
 		

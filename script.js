@@ -64,7 +64,13 @@ function clearAll() {
 }
 function updateDisplay(value) {
     if (displayText !== null && displayText.textContent !== null) {
-        displayText.textContent = value;
+        if (value === "NaN") {
+            displayText.textContent = "Error";
+            clearAll();
+        }
+        else {
+            displayText.textContent = value;
+        }
     }
 }
 clearAll();
@@ -128,12 +134,18 @@ if (operation_buttons !== null) {
             const value = operation_button.getAttribute("id");
             if (value !== null) {
                 last_button_equals = false;
-                if (operator !== "") {
+                if (operator !== "" && num1 !== "" && num2 !== "") { // chain operations
                     displayAnswer(num1, num2, operator);
+                    input_operation(value);
                 }
-                operator = value;
-                waiting_on_second_number = true;
+                else if (operator === "" && num1 !== "") { // regular operation
+                    input_operation(value);
+                }
             }
         });
     });
+}
+function input_operation(value) {
+    operator = value;
+    waiting_on_second_number = true;
 }
